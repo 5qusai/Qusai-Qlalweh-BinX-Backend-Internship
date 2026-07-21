@@ -1,0 +1,52 @@
+
+
+Student s1 = new Student("Ahmed");
+Instructor i1 = new Instructor("Diaa");
+
+Fun(s1);
+Fun(i1);
+
+static void Fun(IPerson p)
+{
+    p.getInfo();
+}
+
+interface IPerson
+{
+
+    void getInfo();
+
+
+}
+
+public class Student : IPerson
+{
+    public string name;
+    public Student(string name)
+    {
+        this.name = name;
+    }
+
+    public void getInfo()
+    {
+        Console.WriteLine($"Name:{name}");
+    }
+
+}
+
+public class Instructor : IPerson
+{
+    public string name;
+   public Instructor(string name)
+    {
+        this.name = name;
+    }
+
+    public void getInfo()
+    {
+        Console.WriteLine($"Name:{name}");
+    }
+
+}
+
+
