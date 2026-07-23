@@ -1,0 +1,36 @@
+int A = 4, B = 2;
+B = 0;
+try
+{
+    Console.WriteLine("Inside Try Before Exception");
+    A /= B;
+    Console.WriteLine("Inside Try Afer Exception"); // will not be excuted
+
+}
+catch (IndexOutOfRangeException e)
+{
+    Console.WriteLine("Inside Index out of Range Exception");
+}
+catch (DirectoryNotFoundException e)
+{
+    Console.WriteLine("Inside Directory Not Found Exception");
+
+}
+catch (ArithmeticException e)
+{
+    Console.WriteLine("Inside Arithmetic Exception");
+    B = 1;
+    A /= B;
+    Console.WriteLine("Its Done");
+
+}
+catch
+{
+    Console.WriteLine("Inside General Catch");
+}
+finally{
+
+    Console.WriteLine("Inside Finally");
+}
+
+

@@ -1,0 +1,11 @@
+
+string M =await Fun();
+Console.WriteLine(M);
+
+Console.ReadLine();
+async Task<string> Fun()
+{
+    await Task.Delay(1000);
+    return "The Message\n";
+}
+

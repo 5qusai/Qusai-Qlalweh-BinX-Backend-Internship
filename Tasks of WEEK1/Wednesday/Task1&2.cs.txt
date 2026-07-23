@@ -1,0 +1,131 @@
+
+
+List<Student> list = new List<Student>() {
+
+new Student("Ahmed",22),
+new Student("Ali",25),
+new Student("Issam",23),
+new Student("Hiba",19),
+new Student("Hamza",20),
+new Student("Dia",25),
+new Student("Qusai",22),
+new Student("Asmaa",20),
+new Student("Loay",22),
+new Student("Bilal",19),
+new Student("Ala",21),
+new Student("Nour",23),
+
+};
+
+
+
+// Select Students With Age<23
+List<Student> Ans1 = list
+                    .Where(student=>student.getAge()< 23).ToList();
+
+Console.WriteLine("--------Students With Age<23---------");
+foreach (Student student in Ans1) student.getInfo();
+Console.WriteLine("\n\n");
+
+
+// Select Students With Even ID ordered By ID
+List<Student> Ans2 = list
+                    .Where(student => student.id%2==0)
+                    .OrderBy(student=>student.id)
+                    .ToList();
+
+Console.WriteLine("--------Students With Even ID Orded By ID---------");
+foreach (Student student in Ans2) student.getInfo();
+Console.WriteLine("\n\n");
+
+
+
+// Average Ages of Students that their Names starts with A: 
+int Ans3 = list
+                    .Where(student => student.Name.StartsWith('A'))
+                    .Sum(student=>student.getAge());
+
+Console.WriteLine($"Average Ages of Students that their Names starts with A {Ans3}");
+
+
+
+
+public class Student
+{
+
+    public string Name;
+    private int Age;
+    public static string Degree = "Bachelor";
+    private static int counter = 10203040;
+    public int id;
+    public Student()
+    {
+        this.Name = "Unknown";
+        this.Age = 20;
+        counter++;
+        this.id = counter;
+    }
+
+    public Student(string name, int age)
+    {
+        counter++;
+        this.id = counter;
+        this.Age = age;
+        this.Name = name;
+
+    }
+
+    public void getInfo()
+    {
+        Console.WriteLine($"My name is {this.Name}");
+        Console.WriteLine($"I'am {this.Age} years old");
+        Console.WriteLine($"With an ID {this.id}");
+        Console.WriteLine($"Student With {Degree} Degree \n\n");
+    }
+
+    public int getAge()
+    {
+        return this.Age;
+    }
+
+    public void setAge(int age)
+    {
+        this.Age = age;
+    }
+
+}
+
+public class Instructor
+{
+
+    public string name;
+    private double salary;
+    private static int counter = 11223344;
+    public int id;
+
+    public Instructor(string name, double sal)
+    {
+
+        salary = sal;
+        this.name = name;
+        counter++;
+        this.id = counter;
+    }
+
+    public void getInfo()
+    {
+        Console.WriteLine($"Instructor Name: {name}");
+        Console.WriteLine($"Instructor ID: {id}");
+        Console.WriteLine($"Instructor Salary: {salary}$ \n\n");
+    }
+
+    public double getSalary()
+    {
+        return salary;
+    }
+
+    public void setSalary(double salary)
+    {
+        this.salary = salary;
+    }
+}
