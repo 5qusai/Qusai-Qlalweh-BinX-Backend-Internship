@@ -1,0 +1,42 @@
+
+
+
+
+
+
+
+
+
+
+public class Repo<T> where T : class  // it makes the class accept only object types 
+                                        // no integer , no double , no struct ... etc
+{
+
+    private List<T> L;
+
+   public Repo()
+    {
+        L = new List<T>();
+    }
+
+    public void Add(T item)
+    {
+        L.Add(item);
+    }
+
+    public void GetAll()
+    {
+        foreach(var a in L)
+            Console.Write(a);
+        Console.WriteLine();
+    }
+
+    public bool Find(Func<T,bool> pre)
+    {
+        foreach (var a in L)
+            if(pre(a)) return true;
+        return false;
+    }
+
+}
+

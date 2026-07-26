@@ -1,0 +1,103 @@
+
+Student s1 = new Student("Ahmed");
+Student s2 = new Student("Mohamed");
+Instructor i1 = new Instructor("Mostafa");
+Instructor i2 = new Instructor("israa");
+
+Repo<object> R = new Repo<object>();
+R.Add(s1);
+R.Add(s2);
+R.Add(i1);
+R.Add(i2);
+var A=R.GetAll();
+foreach (var a in A)
+    Console.WriteLine(a+" ");
+
+void Fun(IPerson p)
+{
+    p.getInfo();
+}
+
+
+public class Repo<T> where T : class  // it makes the class accept only object types 
+                                        // no integer , no double , no struct ... etc
+{
+
+    private List<T> L;
+
+   public Repo()
+    {
+        L = new List<T>();
+    }
+
+    public void Add(T item)
+    {
+        L.Add(item);
+    }
+
+    public IReadOnlyList<T> GetAll()
+    {
+        IReadOnlyList<T> list = L.AsReadOnly();
+
+        
+
+        return list;
+    }
+
+    public bool Find(Func<T,bool> pre)
+    {
+        foreach (var a in L)
+            if(pre(a)) return true;
+        return false;
+    }
+
+}
+
+
+
+
+interface IPerson
+{
+
+    void getInfo();
+
+
+}
+
+public class Student : IPerson
+{
+    public string name;
+    public Student(string name)
+    {
+        this.name = name;
+    }
+
+    public void getInfo()
+    {
+        Console.WriteLine($"Name:{name}");
+    }
+    public override string ToString()
+    {
+        return $"Name:{name}";
+    }
+}
+
+public class Instructor : IPerson
+{
+    public string name;
+    public Instructor(string name)
+    {
+        this.name = name;
+    }
+
+    public override string ToString()
+    {
+        return $"Name:{name}";
+    }
+    public void getInfo()
+    {
+        Console.WriteLine($"Name:{name}");
+    }
+}
+
+
