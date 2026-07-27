@@ -1,0 +1,135 @@
+
+List<Employee> list1 = new List<Employee>() {
+new Employee("Qusai","102030","1",new List<string>(){"C++","PS"}),
+new Employee("Ahmed","102032","2",new List<string>(){"C#","Python"}),
+new Employee("Ali","102033","2",new List<string>(){"PS","Java"}),
+new Employee("Hiba","102055","1"),
+new Employee("Waleed","102041","3"),
+new Employee("Noor","102011","3",new List<string>(){"JS","C#"}),
+
+};
+
+
+
+List<Department> list2 = new List<Department>() {
+new Department("1","IT"),
+new Department("2","Finance"),
+new Department("3","HR"),
+};
+
+
+var Res = from emp in list1
+          group emp by emp.DepID into Groups
+          select Groups;
+
+foreach (var group in Res)
+{
+    Console.WriteLine($"Number of Employees For Dep {group.Key} is {group.Count()}");
+    
+}
+
+Console.WriteLine("-------------------------------------------");
+
+var res = from emp in list1
+          join dep in list2
+          on emp.DepID equals dep.ID
+          select new EmpDept(emp.Name,dep.Name);
+
+foreach (var emp in res)
+    Console.WriteLine(emp.EmpName+" in "+emp.DeptName);
+
+Console.WriteLine("-------------------------------------------");
+
+var arr = list1.SelectMany(emp=>emp.Skills).ToList();
+foreach (var skill in arr)
+    Console.WriteLine(skill);
+Console.WriteLine("-------------------------------------------");
+
+var reult = list1.Where(emp => emp.Name.StartsWith('A'))
+               .OrderBy(emp => emp.Name)
+               .Select(emp => emp.Name);
+list1.Add(new Employee("Ala","102040","1"));
+
+foreach (var emp in reult)
+    Console.WriteLine(emp);
+// Note That Ala will appear in the output due to
+// deferred excution the query excuted actually in line 56 
+Console.WriteLine("-------------------------------------------");
+
+var Result = list1.Where(emp => emp.Name.StartsWith('A'))
+               .OrderBy(emp => emp.Name)
+               .Select(emp => emp.Name).ToList();
+
+list1.Add(new Employee("Asad", "102040", "1"));
+
+foreach(var emp in Result)
+    Console.WriteLine(emp);
+
+// Note that Asad will not appear in the output 
+// ToList method reject deferred
+
+public class EmpDept
+
+
+{
+    public string EmpName;
+    public string DeptName;
+
+    public EmpDept(string empN,string deptN)
+    {
+        EmpName=empN;
+        DeptName = deptN;
+    }
+}
+public class Department
+{
+
+    public string Name;
+    public string ID;
+
+    public Department()
+    {
+        
+    }
+    public Department(string id,string name)
+    {
+        Name = name;
+        ID = id;
+    }
+
+}
+
+public class Employee
+{
+
+    public string Name;
+    public string ID;
+    public string DepID;
+    public List<string> Skills;
+
+    public Employee()
+    {
+        
+    }
+    public Employee(string name,string id,string depid)
+    {
+        Name = name;
+        ID = id;
+        DepID = depid;
+        Skills = new List<string>();
+    }
+    public Employee(string name, string id, string depid,List<string> list)
+    {
+        Name = name;
+        ID = id;
+        DepID = depid;
+        Skills = list;
+
+    }
+}
+
+
+
+
+
+
