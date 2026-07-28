@@ -1,0 +1,58 @@
+
+// Sync
+Console.WriteLine("------------Before Calling");
+Console.WriteLine(await Fun1());
+Console.WriteLine(await Fun2());
+Console.WriteLine(await Fun3());
+
+Console.WriteLine("------------After Calling"); // Total Time For Ending = 3s+2s+1s = 6s
+
+Console.WriteLine("\n\n - - - - - - - - - - - - - - - - - - - - - \n\n");
+
+// Sync
+Console.WriteLine("------------Before Calling");
+var task1= Fun4();
+var task2= Fun5();
+var task3= Fun6();
+List<string> list= (await Task.WhenAll(task1,task2,task3)).ToList();
+Console.WriteLine("------------After Calling"); // Total Time For Ending = max(3s,2s,1s) = 3s
+
+
+
+Console.ReadKey();
+
+async Task<string> Fun1()
+{
+    await Task.Delay(1000);
+    return "Meassage # 1";
+}
+
+async Task<string> Fun2()
+{
+    await Task.Delay(2000);
+    return "Meassage # 2";
+}
+
+async Task<string> Fun3()
+{
+    await Task.Delay(3000);
+    return "Meassage # 3";
+}
+
+ async Task<string> Fun4()
+{
+    await Task.Delay(1000);
+    return "Meassage # 1";
+}
+
+ async Task<string> Fun5()
+{
+    await Task.Delay(2000);
+    return "Meassage # 2";
+}
+
+ async Task<string> Fun6()
+{
+    await Task.Delay(3000);
+    return "Meassage # 3";
+}
